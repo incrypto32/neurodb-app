@@ -1,4 +1,4 @@
-import 'package:neurodb/arch/architecture/view_model.dart';
+import 'package:neurodb/app/architecture/view_model.dart';
 import 'package:neurodb/logic/services/firebase/firesbase.dart';
 
 class StartUpViewModel extends ViewModel {
@@ -13,6 +13,7 @@ class StartUpViewModel extends ViewModel {
   bool get isLoggedIn => _isLoggedIn;
 
   _setLoggedIn(bool val) {
+    print("called setLoggedIn");
     _isLoggedIn = val;
     notifyListeners();
   }
@@ -26,7 +27,7 @@ class StartUpViewModel extends ViewModel {
         _setLoggedIn(user != null);
       });
     } catch (e) {
-      print(e);
+      if (e is Exception) {}
     }
     setBusy(false);
   }

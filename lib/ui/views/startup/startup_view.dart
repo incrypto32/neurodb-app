@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:neurodb/arch/architecture/view_builder.dart';
-import 'package:neurodb/arch/dependency_injection/locator.dart';
+import 'package:neurodb/app/architecture/view_builder.dart';
+import 'package:neurodb/app/dependency_injection/locator.dart';
 import 'package:neurodb/logic/services/firebase/firesbase.dart';
 import 'package:neurodb/ui/views/auth/login_view.dart';
 import 'package:neurodb/ui/views/home/home_view.dart';

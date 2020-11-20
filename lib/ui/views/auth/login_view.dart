@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:neurodb/arch/data/constants.dart';
+import 'package:neurodb/app/architecture/view_builder.dart';
+import 'package:neurodb/app/data/constants.dart';
 import 'package:neurodb/ui/views/auth/login_view_model.dart';
+import 'package:neurodb/ui/widgets/auth_text_field.dart';
 
 class LoginView extends StatefulWidget {
   @override
@@ -73,25 +75,40 @@ class _LoginViewState extends State<LoginView> {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 25.0),
       width: double.infinity,
-      child: RaisedButton(
-        elevation: 5.0,
-        onPressed: model.submit,
-        padding: EdgeInsets.all(15.0),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.0),
-        ),
-        color: Colors.white,
-        child: Text(
-          'LOGIN',
-          style: TextStyle(
-            color: Color(0xFF527DAA),
-            letterSpacing: 1.5,
-            fontSize: 18.0,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'OpenSans',
-          ),
-        ),
-      ),
+      child: ViewBuilder<LoginViewModel>(
+          modelBuilder: (context) => model,
+          builder: (context, model, child) {
+            return RaisedButton(
+              elevation: 5.0,
+              onPressed: model.submit,
+              padding: EdgeInsets.all(15.0),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30.0),
+              ),
+              color: Colors.white,
+              child: model.isBusy
+                  ? Text(
+                      "Loading..",
+                      style: TextStyle(
+                        color: Color(0xFF527DAA),
+                        letterSpacing: 1.5,
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'OpenSans',
+                      ),
+                    )
+                  : Text(
+                      'LOGIN',
+                      style: TextStyle(
+                        color: Color(0xFF527DAA),
+                        letterSpacing: 1.5,
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'OpenSans',
+                      ),
+                    ),
+            );
+          }),
     );
   }
 
@@ -135,7 +152,6 @@ class _LoginViewState extends State<LoginView> {
                         'Sign In',
                         style: TextStyle(
                           color: Colors.white,
-                          fontFamily: 'OpenSans',
                           fontSize: 30.0,
                           fontWeight: FontWeight.bold,
                         ),
@@ -154,43 +170,6 @@ class _LoginViewState extends State<LoginView> {
               )
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class AuthTextField extends StatelessWidget {
-  const AuthTextField({
-    Key key,
-    @required this.icon,
-    @required this.hintText,
-    @required this.onChanged,
-    this.isPassword = false,
-  }) : super(key: key);
-  final Icon icon;
-  final String hintText;
-  final Function(String) onChanged;
-  final bool isPassword;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.centerLeft,
-      decoration: kBoxDecorationStyle,
-      height: 60.0,
-      child: TextField(
-        obscureText: isPassword,
-        onChanged: onChanged,
-        style: TextStyle(
-          color: Colors.white,
-        ),
-        decoration: InputDecoration(
-          border: InputBorder.none,
-          contentPadding: EdgeInsets.only(top: 14.0),
-          prefixIcon: icon,
-          hintText: hintText,
-          hintStyle: kHintTextStyle,
         ),
       ),
     );

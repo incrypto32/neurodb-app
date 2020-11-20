@@ -8,4 +8,5 @@ void setupLocator() {
   locator.registerLazySingleton(() => NavigationService());
   locator.registerLazySingleton(() => DialogService());
   locator.registerLazySingleton(() => FirebaseService());
+  locator.registerLazySingleton(() => SnackbarService());
 }

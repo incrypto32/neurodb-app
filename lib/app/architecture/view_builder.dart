@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:neurodb/arch/architecture/view_model.dart';
+import 'package:neurodb/app/architecture/view_model.dart';
 import 'package:provider/provider.dart';
 
 class ViewBuilder<T extends ViewModel> extends StatelessWidget {

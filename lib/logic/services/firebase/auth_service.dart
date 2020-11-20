@@ -1,8 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-
-class WrongPassword implements Exception {}
-
-class AuthError implements Exception {}
+import 'package:neurodb/app/utilities/custom_exception.dart';
 
 class AuthService {
   var _auth = FirebaseAuth.instance;
@@ -11,17 +8,22 @@ class AuthService {
     _auth.authStateChanges().listen((callback));
   }
 
-  loginWithEmailAndPassword(String email, String password) async {
+  Future<void> logout() async {
+    await _auth.signOut();
+  }
+
+  Future<void> loginWithEmailAndPassword(String email, String password) async {
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
+      await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
     } on FirebaseAuthException catch (e) {
-      print(e);
-      throw AuthError();
+      e.code == 'wrong-password'
+          ? throw WrongPassword()
+          : throw AuthException();
     } catch (e) {
-      throw AuthError();
+      throw AuthException();
     }
   }
 }
