@@ -12,6 +12,19 @@ class NeuroDB extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        textTheme: Theme.of(context).textTheme.copyWith(
+              headline5: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.indigo[800],
+              ),
+              bodyText2: TextStyle(
+                color: Colors.indigo[700],
+              ),
+              subtitle1: TextStyle(
+                color: Colors.indigo[700],
+                fontWeight: FontWeight.bold,
+              ),
+            ),
       ),
       builder: ExtendedNavigator.builder(
         navigatorKey: locator<NavigationService>().navigatorKey,

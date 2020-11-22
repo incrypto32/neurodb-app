@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:neurodb/app/dependency_injection/locator.dart';
+import 'package:neurodb/app/navigation/router.gr.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 class HomeView extends StatelessWidget {
   @override
@@ -54,7 +57,10 @@ class HomeView extends StatelessWidget {
                                 title: "Search",
                                 subtitle: "Search all patients"),
                             _smallCard(
-                                title: "History", subtitle: "All patients")
+                              title: "History",
+                              subtitle: "All patients",
+                              view: Routes.inPatientsView,
+                            ),
                           ],
                         ),
                       )
@@ -76,7 +82,9 @@ class HomeView extends StatelessWidget {
         margin: EdgeInsets.all(10),
         child: RaisedButton(
           color: Colors.white,
-          onPressed: () {},
+          onPressed: () {
+            locator<NavigationService>().navigateTo(Routes.inPatientsView);
+          },
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
@@ -105,7 +113,8 @@ class HomeView extends StatelessWidget {
     );
   }
 
-  Widget _smallCard({@required String title, @required String subtitle}) {
+  Widget _smallCard(
+      {@required String title, @required String subtitle, String view}) {
     return Expanded(
       child: Container(
         margin: EdgeInsets.all(10),
@@ -114,7 +123,9 @@ class HomeView extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
-          onPressed: () {},
+          onPressed: () {
+            locator<NavigationService>().navigateTo(view);
+          },
           child: Container(
             padding: EdgeInsets.all(20),
             child: Column(

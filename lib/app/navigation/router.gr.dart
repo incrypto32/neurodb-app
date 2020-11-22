@@ -10,14 +10,17 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import '../../ui/views/home/home_view.dart';
+import '../../ui/views/inpatients/inpatients_view.dart';
 import '../../ui/views/startup/startup_view.dart';
 
 class Routes {
   static const String homeView = '/home-view';
   static const String startUpView = '/';
+  static const String inPatientsView = '/in-patients-view';
   static const all = <String>{
     homeView,
     startUpView,
+    inPatientsView,
   };
 }
 
@@ -27,6 +30,7 @@ class NeuroRouter extends RouterBase {
   final _routes = <RouteDef>[
     RouteDef(Routes.homeView, page: HomeView),
     RouteDef(Routes.startUpView, page: StartUpView),
+    RouteDef(Routes.inPatientsView, page: InPatientsView),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -40,6 +44,12 @@ class NeuroRouter extends RouterBase {
     StartUpView: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => StartUpView(),
+        settings: data,
+      );
+    },
+    InPatientsView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => InPatientsView(),
         settings: data,
       );
     },
