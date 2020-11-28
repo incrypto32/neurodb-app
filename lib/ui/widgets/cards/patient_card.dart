@@ -38,7 +38,7 @@ class PatientCard extends StatelessWidget {
                     ),
                     Text("${patient.age} ${patient.sex}"),
                     Text("Diagnosis : ${patient.diagnosis.finalDiagnosis}"),
-                    Text("${patient.date}")
+                    Text("${patient.date?.toDate().toString().split(" ")[0]}")
                   ],
                 ),
               ),

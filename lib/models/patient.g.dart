@@ -13,9 +13,10 @@ Patient _$PatientFromJson(Map<String, dynamic> json) {
     ..sex = json['sex'] as String
     ..age = json['age'] as String
     ..room = json['room'] as String
-    ..date = json['date'] as String
+    ..date = json['date']
     ..address = json['address'] as String
     ..phone = json['phone'] as String
+    ..inPatient = json['inPatient'] as bool
     ..currentMedication = json['currentMedication'] as String ?? 'NIL'
     ..diagnosis = Diagnosis.fromJson(json['diagnosis'] as Map<String, dynamic>)
     ..presentHistory =
@@ -36,6 +37,7 @@ Map<String, dynamic> _$PatientToJson(Patient instance) => <String, dynamic>{
       'date': instance.date,
       'address': instance.address,
       'phone': instance.phone,
+      'inPatient': instance.inPatient,
       'currentMedication': instance.currentMedication,
       'diagnosis': instance.diagnosis,
       'presentHistory': instance.presentHistory,

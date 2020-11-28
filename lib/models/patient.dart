@@ -9,9 +9,10 @@ class Patient {
   String sex;
   String age;
   String room;
-  String date;
+  dynamic date;
   String address;
   String phone;
+  bool inPatient;
   @JsonKey(nullable: true, defaultValue: "NIL")
   String currentMedication;
   Diagnosis diagnosis;
