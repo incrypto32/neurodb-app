@@ -9,80 +9,78 @@ class PatientView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GradientScaffold(
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 15),
-        child: Column(
-          children: [
-            Heading(
-              boldedText: "Neuro ",
-              normalText: "DB",
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(vertical: 20),
-              child: Row(
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        child: Text(
-                          "${patient.name}",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 30,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        child: Text(
-                          "${patient.age} ${patient.sex}",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Spacer(),
-                  Container(
-                    child: Column(
+      child: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 15),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Heading(
+                boldedText: "Neuro ",
+                normalText: "DB",
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 20),
+                child: Row(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          "Room No:",
-                          style: TextStyle(
-                            color: Colors.white,
+                        Container(
+                          child: Text(
+                            "${patient.name}",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 30,
+                            ),
                           ),
                         ),
-                        Text(
-                          "${patient.room}",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 30,
+                        Container(
+                          child: Text(
+                            "${patient.age} ${patient.sex}",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                            ),
                           ),
-                        )
+                        ),
                       ],
                     ),
-                  ),
-                ],
+                    Spacer(),
+                    Container(
+                      child: Column(
+                        children: [
+                          Text(
+                            "Room No:",
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                          Text(
+                            "${patient.room}",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 30,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Expanded(
-              child: Card(
+              Card(
                 margin: EdgeInsets.all(0),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(20),
-                  ),
+                  borderRadius: BorderRadius.circular(20),
                 ),
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 15),
-                  // margin: EdgeInsets.symmetric(vertical: 15),
                   width: double.infinity,
-                  child: ListView(
-                    shrinkWrap: true,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       buildHeading(
                         context,
@@ -98,35 +96,45 @@ class PatientView extends StatelessWidget {
                         title: "Contact Number",
                         content: patient.phone,
                       ),
-                      buildHeading(context, "Data"),
-                      buildSubHeading(context, "Diagnosis"),
-                      buildContent(patient.diagnosis.pd1),
-                      buildContent(patient.diagnosis.pd2),
-                      buildContent(patient.diagnosis.pd3),
-                      buildContent(patient.diagnosis.finalDiagnosis),
-                      buildSubHeading(context, "History"),
-                      buildHistoryRow(patient.presentHistory.ph1),
-                      buildHistoryRow(patient.presentHistory.ph2),
-                      buildHistoryRow(patient.presentHistory.ph3),
-                      buildSubHeading(context, "Medication"),
-                      buildContent(patient.currentMedication),
-                      buildHeading(context, "Vitals"),
-                      buildSubHeading(context, "BP : ${patient.vitals.bp}"),
-                      buildSubHeading(
-                        context,
-                        "Respiration Rate : ${patient.vitals.respRate}",
-                      ),
-                      buildSubHeading(context, "SP02 : ${patient.vitals.sp02}"),
-                      buildSubHeading(context, "GRBS : ${patient.vitals.grbs}"),
-                      buildPersonalHistoryBox(patient),
+                      buildDetailsExpansionTile(context),
                     ],
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
+    );
+  }
+
+  ExpansionTile buildDetailsExpansionTile(BuildContext context) {
+    return ExpansionTile(
+      title: Text("Details"),
+      expandedCrossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        buildHeading(context, "Data"),
+        buildSubHeading(context, "Diagnosis"),
+        buildContent(patient.diagnosis.pd1),
+        buildContent(patient.diagnosis.pd2),
+        buildContent(patient.diagnosis.pd3),
+        buildContent(patient.diagnosis.finalDiagnosis),
+        buildSubHeading(context, "History"),
+        buildHistoryRow(patient.presentHistory.ph1),
+        buildHistoryRow(patient.presentHistory.ph2),
+        buildHistoryRow(patient.presentHistory.ph3),
+        buildSubHeading(context, "Medication"),
+        buildContent(patient.currentMedication),
+        buildHeading(context, "Vitals"),
+        buildSubHeading(context, "BP : ${patient.vitals.bp}"),
+        buildSubHeading(
+          context,
+          "Respiration Rate : ${patient.vitals.respRate}",
+        ),
+        buildSubHeading(context, "SP02 : ${patient.vitals.sp02}"),
+        buildSubHeading(context, "GRBS : ${patient.vitals.grbs}"),
+        buildPersonalHistoryBox(patient),
+      ],
     );
   }
 
