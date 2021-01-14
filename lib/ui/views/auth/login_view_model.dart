@@ -38,6 +38,7 @@ class LoginViewModel extends ViewModel {
       try {
         await _authService.loginWithEmailAndPassword(email, password);
       } catch (e) {
+        print(e);
         if (e is AuthException) {
           snackbarService.showSnackbar(
               message: "Wrong password and email combination");

@@ -1,21 +1,34 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:neurodb/app/architecture/view_model.dart';
 import 'package:neurodb/app/dependency_injection/locator.dart';
 import 'package:neurodb/logic/services/firebase/firesbase.dart';
 import 'package:neurodb/logic/services/firebase/firestore.dart';
+import 'package:neurodb/models/filter/filter.dart';
 import 'package:neurodb/models/patient/patient.dart';
+import 'package:neurodb/ui/widgets/search/filter_dialog.dart';
 
-class InPatientsViewModel extends ViewModel {
+class SearchViewModel extends ViewModel {
   final FirestoreService store = locator<FirebaseService>().firestoreService;
-
+  BuildContext context;
   List<Patient> patients = [];
   DocumentSnapshot lastDoc;
   bool initialized = false;
   int limit = 10;
   bool _isLoadingMore = false;
+  Filter filters = Filter();
 
-  InPatientsViewModel() {
+  SearchViewModel(this.context) {
     getInPatients();
+  }
+
+  showFilterDialog(BuildContext ctx) {
+    showDialog(context: ctx, child: FilterDialog(this));
+  }
+
+  setSexFilter(String val) {
+    filters.sexFilter = val;
+    notifyListeners();
   }
 
   void getInPatients() async {

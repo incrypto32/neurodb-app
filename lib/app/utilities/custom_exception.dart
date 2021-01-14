@@ -4,3 +4,5 @@ class AuthException implements Exception {
 }
 
 class WrongPassword extends AuthException {}
+
+class NoRounds implements Exception {}

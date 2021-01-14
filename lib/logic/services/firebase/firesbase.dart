@@ -6,6 +6,10 @@ class FirebaseService {
   AuthService authService;
   FirestoreService firestoreService;
 
+  FirebaseService() {
+    initialize();
+  }
+
   Future<FirebaseApp> initialize() async {
     var app = await Firebase.initializeApp();
     authService = AuthService();

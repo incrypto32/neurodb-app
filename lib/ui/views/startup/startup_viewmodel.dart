@@ -20,6 +20,7 @@ class StartUpViewModel extends ViewModel {
 
   void _init() async {
     setBusy(true);
+
     print("Initializing Startup View");
     try {
       await firebaseService.initialize();

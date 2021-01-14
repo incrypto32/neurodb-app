@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:neurodb/app/dependency_injection/locator.dart';
-import 'package:neurodb/models/patient.dart';
+import 'package:neurodb/models/patient/patient.dart';
 import 'package:neurodb/ui/views/patient/patient_view.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -26,24 +26,29 @@ class PatientCard extends StatelessWidget {
         padding: EdgeInsets.all(20),
         child: Row(
           children: [
-            Container(
-              child: DefaultTextStyle(
-                style: TextStyle(color: Colors.blueGrey[800]),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "${patient.name}",
-                      style: Theme.of(context).textTheme.headline5,
-                    ),
-                    Text("${patient.age} ${patient.sex}"),
-                    Text("Diagnosis : ${patient.diagnosis.finalDiagnosis}"),
-                    Text("${patient.date?.toDate().toString().split(" ")[0]}")
-                  ],
+            Expanded(
+              child: Container(
+                child: DefaultTextStyle(
+                  style: TextStyle(color: Colors.blueGrey[800]),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "${patient.name}",
+                        style: Theme.of(context).textTheme.headline5,
+                      ),
+                      Text(
+                        "${patient.age} ${patient.sex}",
+                        softWrap: true,
+                      ),
+                      Text("Diagnosis : ${patient.diagnosis.finalDiagnosis}",
+                          softWrap: true),
+                      Text("${patient.date?.toDate().toString().split(" ")[0]}")
+                    ],
+                  ),
                 ),
               ),
             ),
-            Spacer(),
             Container(
               padding: EdgeInsets.all(20),
               decoration: BoxDecoration(

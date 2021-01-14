@@ -32,9 +32,12 @@ class InPatientsView extends StatelessWidget {
                         ),
                       )
                     : ListView.builder(
-                        itemBuilder: (context, index) => PatientCard(
-                          patient: model.patients[index],
-                        ),
+                        itemBuilder: (context, index) {
+                          model.loadMore(index);
+                          return PatientCard(
+                            patient: model.patients[index],
+                          );
+                        },
                         itemCount: model.patients.length,
                       ),
               ),

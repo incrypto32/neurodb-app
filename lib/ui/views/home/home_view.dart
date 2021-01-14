@@ -54,8 +54,10 @@ class HomeView extends StatelessWidget {
                         child: Row(
                           children: [
                             _smallCard(
-                                title: "Search",
-                                subtitle: "Search all patients"),
+                              title: "Search",
+                              subtitle: "Search all patients",
+                              view: Routes.searchView,
+                            ),
                             _smallCard(
                               title: "History",
                               subtitle: "All patients",
